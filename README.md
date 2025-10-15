@@ -62,7 +62,7 @@ Advanced matching algorithms that find your songs across different formats:
 
 ### 📥 Automatic Missing Track Downloads
 Never miss a song from your playlists:
-- **[Tidal Downloader](https://github.com/jjdenhertog/spotify-to-plex-tidal-downloader)** integration for individual tracks
+- Native `tidal-dl-ng` integration for automatically downloading missing tracks or albums (set `TIDAL_DL_NG_COMMAND` to point at your CLI)
 - **[Lidarr](https://github.com/Lidarr/Lidarr)** integration for complete albums
 - Automatic missing track detection and reporting
 - Export missing songs as text files with Spotify/Tidal links
@@ -121,8 +121,9 @@ docker run -d \
     -e SPOTIFY_API_CLIENT_SECRET=PASTE_YOUR_SPOTIFY_CLIENT_SECRET_HERE \
     -e SPOTIFY_API_REDIRECT_URI=https://[IP_OF_SPOTIFY_TO_PLEX]:9030/api/spotify/token \
     -e TIDAL_API_CLIENT_ID=PASTE_YOUR_TIDAL_CLIENT_ID_HERE \
-    -e TIDAL_API_CLIENT_SECRET=PASTE_YOUR_TIDAL_CLIENT_SECRET_HERE \
-    -e TIDAL_API_REDIRECT_URI=https://[IP_OF_SPOTIFY_TO_PLEX]:9030/api/tidal/token \
+-e TIDAL_API_CLIENT_SECRET=PASTE_YOUR_TIDAL_CLIENT_SECRET_HERE \
+-e TIDAL_API_REDIRECT_URI=https://[IP_OF_SPOTIFY_TO_PLEX]:9030/api/tidal/token \
+-e TIDAL_DL_NG_COMMAND="python3.12 -m tidal_dl_ng.cli" \
     -e LIDARR_API_KEY=PASTE_YOUR_LIDARR_API_KEY_HERE \
     -e ENCRYPTION_KEY=PASTE_YOUR_ENCRYPTION_KEY \
     -e PLEX_APP_ID=eXf+f9ktw3CZ8i45OY468WxriOCtoFxuNPzVeDcAwfw= \
@@ -154,6 +155,7 @@ services:
             - TIDAL_API_CLIENT_ID=PASTE_YOUR_TIDAL_CLIENT_ID_HERE
             - TIDAL_API_CLIENT_SECRET=PASTE_YOUR_TIDAL_CLIENT_SECRET_HERE
             - TIDAL_API_REDIRECT_URI=https://[IP_OF_SPOTIFY_TO_PLEX]:9030/api/tidal/token
+            - TIDAL_DL_NG_COMMAND=python3.12 -m tidal_dl_ng.cli
             - LIDARR_API_KEY=PASTE_YOUR_LIDARR_API_KEY_HERE
             - ENCRYPTION_KEY=PASTE_YOUR_ENCRYPTION_KEY
             - PLEX_APP_ID=eXf+f9ktw3CZ8i45OY468WxriOCtoFxuNPzVeDcAwfw=

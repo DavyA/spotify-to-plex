@@ -10,6 +10,7 @@ import { getMusicSearchConfig } from "@spotify-to-plex/music-search/functions/ge
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { findMissingTidalTracks } from "../utils/findMissingTidalTracks";
+import { downloadTidalTracks } from "../utils/tidalDownloader";
 import { getCachedPlexTracks } from "../utils/getCachedPlexTracks";
 import { getPlexPlaylists } from "../utils/getPlexPlaylists";
 import { getSavedPlaylists } from "../utils/getSavedPlaylists";
@@ -160,6 +161,8 @@ export async function syncPlaylists() {
                 if (!missingTidalTracks.includes(item.tidal_id))
                     missingTidalTracks.push(item.tidal_id)
             })
+
+            await downloadTidalTracks(tidalTracks.map(item => item.tidal_id));
 
             // Collect unique albums for Lidarr
             missingTracks.forEach(track => {

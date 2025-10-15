@@ -15,6 +15,7 @@ import { errorSyncType } from "../utils/errorSyncType";
 import { loadSpotifyData } from "../utils/loadSpotifyData";
 import { getSettings } from "@spotify-to-plex/plex-config/functions/getSettings";
 import { LidarrAlbumData } from "@spotify-to-plex/shared-types/common/lidarr";
+import { downloadTidalAlbums } from "../utils/tidalDownloader";
 
 export async function syncAlbums() {
 
@@ -110,6 +111,8 @@ export async function syncAlbums() {
             if (!missingTidalAlbums.includes(tidalId))
                 missingTidalAlbums.push(tidalId)
         })
+
+        await downloadTidalAlbums(tidalIds);
 
         // Collect unique albums for Lidarr
         missingTracks.forEach(track => {
